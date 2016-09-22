@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Sentinel;
 use Validator;
 use Input;
+use Flash;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 
@@ -28,6 +29,7 @@ class LoginController extends Controller
 
 	// return Redirect::back()
 		// ->withInput()
+    
 		return redirect()->route('users.create');
 
   }  

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Articles;
 use App\Http\Requests;
@@ -18,25 +18,17 @@ class ArticleController extends Controller
      */
     public function index()
     {
+
+       
          $data = Articles::all();
-         if ($user = Sentinel::check()){
+        $data = DB::table('articles')->paginate(10);
 
-        if ( Sentinel::hasAccess('admin.index')){
-
-            return view('include.articleadmin', compact('data'));
-
-        }
-       else{
-         return view('include.article', compact('data'));
+            return view('include.articleadmin', compact('data'),['articles' => $data]);
 
 
-       }
-   }
-   else{
-    return view('include.article', compact('data')); 
    }
         
-    }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -63,7 +55,7 @@ class ArticleController extends Controller
         $data->user_email = $user->email;
         $data->article = $request->article;
         $data->save();
-        return redirect()->route('users.indexlog');
+        return redirect()->route('article.index');
         
     }
 
@@ -112,5 +104,11 @@ class ArticleController extends Controller
         $data = Articles::findOrFail($id);
         $data->delete();
         return redirect()->route('article.index');
+    }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $data = Articles::where('article','LIKE','%'.$search.'%')->paginate(10);
+        return view('include.articleadmin', compact('data'));
     }
 }

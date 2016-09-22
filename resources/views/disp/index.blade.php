@@ -7,13 +7,13 @@
      <div class="well bs-component">
       <!-- form field for user -->
       <div class="form-group">
-        {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control', 'required' => 'required'])!!}
+        {!! Form::text('email', null, ['placeholder' => 'Email', 'class' => 'form-control'])!!}
      </div>
 
      
 
      <div class="form-group">
-         {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control', 'required' => 'required'])!!}
+         {!! Form::password('password', ['placeholder' => 'Password', 'class' => 'form-control'])!!}
      </div>
      
     
