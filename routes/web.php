@@ -19,11 +19,16 @@ Route::get('/home', function () {
     return view('disp.index');
 });
 
+
+
 Route::get('users/indexlog', ['as' => 'users.indexlog', 'uses' => 'UsersController@indexlog']);
 Route::get('sets/assignRole', ['as' => 'sets.assignRole', 'uses' => 'AssignRoleController@assignRole']);
 Route::get('sets/addPermission', ['as' => 'sets.addPermission', 'uses' => 'AssignRoleController@addPermission']);
+Route::get('/logout', ['as' => 'home.logout', 'uses' => 'LoginController@logout']);
+Route::get('/show', ['as' => 'home.tampil', 'uses' => 'LoginController@show']);
 Route::resource('users', 'UsersController');
 Route::resource('sets', 'AssignRoleController');
 Route::resource('home', 'LoginController');
 Route::resource('admin', 'AdminController');
+Route::resource('article', 'ArticleController');
 

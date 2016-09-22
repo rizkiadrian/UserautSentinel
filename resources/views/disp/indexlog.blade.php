@@ -4,11 +4,11 @@
 
 @if ($user = Sentinel::check())
 
-   <a href="/home">Logout</a>
+   <a href="{{ route('home.logout') }}">Logout</a>
    <h3>Hello {{$user->username}}</h3>
 
    <a href="{{ route('sets.assignRole') }}" class="btn btn-success">SET ROLE</a>
-   <a href="{{ route('sets.addPermission') }}" class="btn btn-danger">SET PERMISSION</a>
+   <a href="{{ route('article.create') }}" class="btn btn-danger">Create Article</a>
    @if ( Sentinel::hasAccess('admin.index'))
    <a href="{{ route('admin.index') }}" class="btn btn-danger">ADMIN ONLY</a>
    @else

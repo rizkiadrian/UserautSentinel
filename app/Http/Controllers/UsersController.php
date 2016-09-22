@@ -48,8 +48,8 @@ class UsersController extends Controller
       // Session::flash('notice', 'Signup Success');
      $role = Sentinel::findRoleBySlug('normal');
      $user->roles()->attach($role);
-     
-
+     $user->addPermission('admin.index',false);
+     $user->save();
   return Redirect::back()
     ->withSuccess('Role attached successfully.');
       // return redirect()->route('sets.assignRole');

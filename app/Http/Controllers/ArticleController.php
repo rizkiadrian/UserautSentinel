@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Articles;
+use App\Http\Requests;
 use Sentinel;
 use Validator;
 use Input;
-use App\Http\Requests;
 
-class AdminController extends Controller
+class ArticleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +18,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-       if ( !Sentinel::hasAccess('admin.index')){
-            return redirect('/home');
-        }
+        $data = Articles::all();
+        return view('include.article', compact('data'));
     }
 
     /**
@@ -29,7 +29,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+         return view('include.CreateArticle');
     }
 
     /**
@@ -40,7 +40,15 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $user = Sentinel::getUser();
+        $data = new Articles();
+        $data->user_id = $user->id;
+        $data->user_email = $user->email;
+        $data->article = $request->article;
+        $data->save();
+        return redirect()->route('users.indexlog');
+        
     }
 
     /**

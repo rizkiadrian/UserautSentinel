@@ -36,12 +36,26 @@ class LoginController extends Controller
 
   {
 
-    Sentinel::logout();
-
-    //Session::flash('notice', 'Success Logout');
-
-    return redirect()->route('users.index');
 
   }	
+
+  public function logout()
+
+  {
+
+        $user = Sentinel::getUser();
+        Sentinel::logout($user, true);
+        return redirect('/home');
+
+  } 
+
+  public function tampil()
+
+  {
+      $user = Sentinel::getUser();
+      $data = $user->email;
+        
+
+  } 
 
 }
