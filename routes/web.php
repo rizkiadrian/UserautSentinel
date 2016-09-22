@@ -19,6 +19,10 @@ Route::get('/home', function () {
     return view('disp.index');
 });
 
+Route::get('/adminar', function () {
+    return view('include.articleadmin');
+});
+
 
 
 Route::get('users/indexlog', ['as' => 'users.indexlog', 'uses' => 'UsersController@indexlog']);

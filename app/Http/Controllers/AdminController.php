@@ -18,8 +18,12 @@ class AdminController extends Controller
     public function index()
     {
        if ( !Sentinel::hasAccess('admin.index')){
+
             return redirect('/home');
+
         }
+
+        
     }
 
     /**

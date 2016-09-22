@@ -1,8 +1,7 @@
 @extends('layout.default')
 @section('content')
-
-
-     <h1>Upload a Photo </h1>
+<div class = "container">
+     <h1>REGISTER USER </h1>
 
 
      <hr/>
@@ -55,6 +54,7 @@
 
         
 
+     </div>
      </div>
      </div>
      </div>

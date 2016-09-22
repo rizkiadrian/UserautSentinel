@@ -16,7 +16,7 @@
    @endif
   @else
 
-    <li>{!! link_to('login', 'Login') !!}</li>
+    <h3><a href="{{ route('home.index') }}">Login</a></h3>
 
   @endif
  

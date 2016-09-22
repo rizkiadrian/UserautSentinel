@@ -20,7 +20,7 @@ class CreateArticlesTable extends Migration
             $table->text('article');
             $table->timestamps();
             $table->engine = 'InnoDB';
-            $table->unique('user_id');
+            
            
         });
     }

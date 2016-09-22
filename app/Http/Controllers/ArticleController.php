@@ -18,8 +18,24 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $data = Articles::all();
-        return view('include.article', compact('data'));
+         $data = Articles::all();
+         if ($user = Sentinel::check()){
+
+        if ( Sentinel::hasAccess('admin.index')){
+
+            return view('include.articleadmin', compact('data'));
+
+        }
+       else{
+         return view('include.article', compact('data'));
+
+
+       }
+   }
+   else{
+    return view('include.article', compact('data')); 
+   }
+        
     }
 
     /**
@@ -93,6 +109,8 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Articles::findOrFail($id);
+        $data->delete();
+        return redirect()->route('article.index');
     }
 }
