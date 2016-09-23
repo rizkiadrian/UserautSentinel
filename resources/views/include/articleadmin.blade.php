@@ -41,6 +41,7 @@
 			<td>
 			@if($user = Sentinel::check())
 			@if ( Sentinel::hasAccess('admin.index'))
+			<a href="{{ route('article.edit', $datas->id) }}" class="btn btn-warning">EDIT</a> <br/><br/> 
 				<form method="POST" action="{{ route('article.destroy', $datas->id) }}" accept-charset="UTF-8"> 
 	                <input name="_method" type="hidden" value="DELETE">
 	                <input name="_token" type="hidden" value="{{ csrf_token() }}">

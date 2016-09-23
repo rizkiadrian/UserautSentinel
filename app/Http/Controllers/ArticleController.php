@@ -78,7 +78,8 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Articles::findOrFail($id);
+        return view('include.editarticle', compact('data'));
     }
 
     /**
@@ -90,7 +91,10 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = Articles::findOrFail($id);
+        $data->article = $request->article;
+        $data->save();
+        return redirect()->route('article.index');
     }
 
     /**
