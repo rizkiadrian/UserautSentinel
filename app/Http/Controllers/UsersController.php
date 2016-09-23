@@ -14,18 +14,18 @@ class UsersController extends Controller
 {
 	public function index()
     {
-        return view('disp.index', compact('data'));
+        return view('disp.index', compact('user'));
     }
 
     public function indexlog()
     {
-        return view('disp.indexlog', compact('data'));
+        return view('disp.indexlog');
     }
      public function create()
 
   {
 
-    return view('user.create', compact('data'));
+    return view('user.create');
 
   }
 
@@ -48,10 +48,17 @@ class UsersController extends Controller
       // Session::flash('notice', 'Signup Success');
      $role = Sentinel::findRoleBySlug('normal');
      $user->roles()->attach($role);
-     $user->addPermission('admin.index',false);
      $user->save();
   return Redirect::back()
     ->withSuccess('Role attached successfully.');
       // return redirect()->route('sets.assignRole');
   }
+
+  public function destroy($id)
+{
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.index');
+
+}
 }

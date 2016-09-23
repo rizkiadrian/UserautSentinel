@@ -78,8 +78,19 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
+        if ($user = Sentinel::check()){
+        if ( Sentinel::hasAccess('admin.index')){
         $data = Articles::findOrFail($id);
         return view('include.editarticle', compact('data'));
+    }
+        else{
+            return view('disp.indexlog');
+        }
+    
+}
+    else{
+        return view('disp.indexlog');
+    }
     }
 
     /**
@@ -91,10 +102,20 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($user = Sentinel::check()){
+        if ( Sentinel::hasAccess('admin.index')){
         $data = Articles::findOrFail($id);
         $data->article = $request->article;
         $data->save();
         return redirect()->route('article.index');
+    }
+    else{
+        return view('disp.indexlog');
+    }
+}
+    else{
+        return view('disp.indexlog');
+    }
     }
 
     /**

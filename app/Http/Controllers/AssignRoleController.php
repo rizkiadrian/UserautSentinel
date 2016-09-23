@@ -18,7 +18,7 @@ class AssignRoleController extends Controller
 {
 	$role = Sentinel::findRoleBySlug('admin');
 
-	$user = Sentinel::getUser();
+	$user = ;
 
 	$user->roles()->attach($role);
 	$user->addPermission('admin.index');

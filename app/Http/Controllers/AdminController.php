@@ -7,7 +7,8 @@ use Sentinel;
 use Validator;
 use Input;
 use App\Http\Requests;
-
+use App\User;
+use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     /**
@@ -20,6 +21,12 @@ class AdminController extends Controller
        if ( !Sentinel::hasAccess('admin.index')){
 
             return redirect('/home');
+
+        }
+        else{
+             $user = User::all();
+              $user = DB::table('users')->paginate(10);
+            return view('include.admincontrol', compact('user'),['users' => $user]);
 
         }
 
@@ -89,6 +96,15 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.index');
+    }
+
+    public function search(Request $request){
+        $search = $request->get('search');
+        $user = User::where('username','LIKE','%'.$search.'%')->paginate(10);
+        return view('include.admincontrol', compact('user'));
     }
 }
