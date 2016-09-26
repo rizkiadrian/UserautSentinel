@@ -1,5 +1,4 @@
-@extends('layout.default')
-@section('content')
+
 {!! Form::open(array('route' => 'article.store', 'class' => 'form', 'files' => true)) !!}
 <div class ="container">
      <div class ="row">

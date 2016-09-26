@@ -20,7 +20,7 @@ class ArticleController extends Controller
     {
 
        
-         $data = Articles::all();
+        $data = Articles::all();
         $data = DB::table('articles')->paginate(10);
 
             return view('include.articleadmin', compact('data'),['articles' => $data]);
